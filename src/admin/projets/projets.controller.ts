@@ -16,7 +16,10 @@ import { PermissionsGuard } from '../../auth/guards/permissions.guard';
 import { RolesGuard } from '../../auth/guards/roles.guard';
 import { ProjetsService } from './projets.service';
 import { CreateProjetDto, UpdateProjetDto } from './dto/projet.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Projets')
+@ApiBearerAuth()
 @Controller('admin/projets')
 @UseGuards(RolesGuard, PermissionsGuard)
 @Roles('super_admin', 'admin', 'editor', 'manager')

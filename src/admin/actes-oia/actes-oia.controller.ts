@@ -16,7 +16,10 @@ import { PermissionsGuard } from '../../auth/guards/permissions.guard';
 import { RolesGuard } from '../../auth/guards/roles.guard';
 import { ActesOiaService } from './actes-oia.service';
 import { CreateActeOiaDto, UpdateActeOiaDto } from './dto/acte-oia.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Actes OIA')
+@ApiBearerAuth()
 @Controller('admin/actes-oia')
 @UseGuards(RolesGuard, PermissionsGuard)
 @Roles('super_admin', 'admin', 'editor', 'manager')

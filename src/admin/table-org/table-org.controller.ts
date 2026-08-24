@@ -15,7 +15,10 @@ import { PermissionsGuard } from '../../auth/guards/permissions.guard';
 import { RolesGuard } from '../../auth/guards/roles.guard';
 import { TableOrgService } from './table-org.service';
 import { CreateTableOrgDto, UpdateTableOrgDto } from './dto/table-org.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Types partenaires')
+@ApiBearerAuth()
 @Controller('admin/table-org')
 @UseGuards(RolesGuard, PermissionsGuard)
 @Roles('super_admin', 'admin')

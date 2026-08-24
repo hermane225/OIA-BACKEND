@@ -17,7 +17,10 @@ import { RolesGuard } from '../../auth/guards/roles.guard';
 import { CategoriesService } from './categories.service';
 import { CreateCategorieDto } from './dto/create-categorie.dto';
 import { UpdateCategorieDto } from './dto/update-categorie.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Categories')
+@ApiBearerAuth()
 @Controller('admin/categories')
 @UseGuards(RolesGuard, PermissionsGuard)
 @Roles('super_admin', 'admin', 'editor', 'manager')

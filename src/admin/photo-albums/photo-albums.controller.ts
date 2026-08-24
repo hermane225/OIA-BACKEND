@@ -15,11 +15,14 @@ import { Roles } from '../../common/decorators/roles.decorator';
 import { PermissionsGuard } from '../../auth/guards/permissions.guard';
 import { RolesGuard } from '../../auth/guards/roles.guard';
 import { PhotoAlbumsService } from './photo-albums.service';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import {
   CreatePhotoAlbumDto,
   UpdatePhotoAlbumDto,
 } from './dto/photo-album.dto';
 
+@ApiTags('Albums photos')
+@ApiBearerAuth()
 @Controller('admin/photo-albums')
 @UseGuards(RolesGuard, PermissionsGuard)
 @Roles('super_admin', 'admin', 'editor', 'manager')

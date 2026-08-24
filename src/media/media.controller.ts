@@ -19,7 +19,10 @@ import { PermissionsGuard } from '../auth/guards/permissions.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import type { AuthenticatedUser } from '../auth/interfaces/authenticated-user.interface';
 import { MediaService } from './media.service';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Media')
+@ApiBearerAuth()
 @Controller('admin/media')
 @UseGuards(RolesGuard, PermissionsGuard)
 @Roles('super_admin', 'admin', 'editor', 'manager')

@@ -15,11 +15,14 @@ import { Roles } from '../../common/decorators/roles.decorator';
 import { PermissionsGuard } from '../../auth/guards/permissions.guard';
 import { RolesGuard } from '../../auth/guards/roles.guard';
 import { PrixTendanceHistoriqueService } from './prix-tendance-historique.service';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import {
   CreatePrixTendanceHistoriqueDto,
   UpdatePrixTendanceHistoriqueDto,
 } from './dto/prix-tendance-historique.dto';
 
+@ApiTags('Prix tendance historiques')
+@ApiBearerAuth()
 @Controller('admin/prix-tendance-historiques')
 @UseGuards(RolesGuard, PermissionsGuard)
 @Roles('super_admin', 'admin', 'editor', 'manager')

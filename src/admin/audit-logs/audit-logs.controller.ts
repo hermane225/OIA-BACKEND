@@ -5,7 +5,10 @@ import { Roles } from '../../common/decorators/roles.decorator';
 import { PermissionsGuard } from '../../auth/guards/permissions.guard';
 import { RolesGuard } from '../../auth/guards/roles.guard';
 import { AuditLogService } from '../../audit-log/audit-log.service';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Audit')
+@ApiBearerAuth()
 @Controller('admin/audit-logs')
 @UseGuards(RolesGuard, PermissionsGuard)
 @Roles('super_admin')

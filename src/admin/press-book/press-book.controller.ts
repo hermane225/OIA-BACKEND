@@ -16,7 +16,10 @@ import { PermissionsGuard } from '../../auth/guards/permissions.guard';
 import { RolesGuard } from '../../auth/guards/roles.guard';
 import { PressBookService } from './press-book.service';
 import { CreatePressBookDto, UpdatePressBookDto } from './dto/press-book.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Press book')
+@ApiBearerAuth()
 @Controller('admin/press-book')
 @UseGuards(RolesGuard, PermissionsGuard)
 @Roles('super_admin', 'admin', 'editor', 'manager')

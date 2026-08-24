@@ -14,7 +14,9 @@ import { PressBookService } from '../admin/press-book/press-book.service';
 import { CampagnesService } from '../admin/campagnes/campagnes.service';
 import { PrixTendanceService } from '../admin/prix-tendance/prix-tendance.service';
 import { RevuePresseService } from '../admin/revue-presse/revue-presse.service';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Public')
 @Public()
 @Controller()
 export class PublicContentController {

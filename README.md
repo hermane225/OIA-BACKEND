@@ -19,6 +19,10 @@ npx prisma migrate dev
 npm run start:dev
 ```
 
+## Documentation API (Swagger)
+
+Une fois le serveur démarré, la documentation interactive est disponible sur `GET /api-docs` (spec brute JSON sur `/api-docs-json`). Pour appeler les routes protégées depuis l'UI, cliquer sur **Authorize** et coller le `accessToken` obtenu via `POST /auth/login`.
+
 Au premier démarrage, `AuthService.onModuleInit` :
 1. Seed les rôles (`super_admin`, `admin`, `editor`, `manager`) et permissions (voir `src/auth/access-control.seed.ts`).
 2. Crée un compte super admin par défaut si `DEFAULT_ADMIN_EMAIL` / `DEFAULT_ADMIN_PASSWORD` sont définis et qu'aucun utilisateur n'existe avec ce mail.

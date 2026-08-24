@@ -48,6 +48,10 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
+    if (request.path.startsWith('/api-docs')) {
+      return true;
+    }
+
     const token = extractBearerToken(request.headers.authorization);
 
     if (!token) {

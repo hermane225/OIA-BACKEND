@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Patch, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Permissions } from '../common/decorators/permissions.decorator';
 import { Roles } from '../common/decorators/roles.decorator';
 import { Public } from '../common/decorators/public.decorator';
@@ -7,6 +8,7 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { SiteSettingsService } from './site-settings.service';
 import { UpsertSiteSettingsDto } from './dto/upsert-site-settings.dto';
 
+@ApiTags('Public')
 @Controller('site-settings')
 export class SiteSettingsController {
   constructor(private readonly siteSettingsService: SiteSettingsService) {}
@@ -18,6 +20,8 @@ export class SiteSettingsController {
   }
 }
 
+@ApiTags('Site settings (Admin)')
+@ApiBearerAuth()
 @Controller('admin/site-settings')
 @UseGuards(RolesGuard, PermissionsGuard)
 @Roles('super_admin', 'admin')

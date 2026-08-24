@@ -17,7 +17,10 @@ import { RolesGuard } from '../../auth/guards/roles.guard';
 import { CreatePartenaireDto } from './dto/create-partenaire.dto';
 import { UpdatePartenaireDto } from './dto/update-partenaire.dto';
 import { PartenairesService } from './partenaires.service';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Partenaires')
+@ApiBearerAuth()
 @Controller('admin/partenaires')
 @UseGuards(RolesGuard, PermissionsGuard)
 @Roles('super_admin', 'admin')

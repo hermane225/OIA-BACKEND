@@ -17,7 +17,10 @@ import { RolesGuard } from '../../auth/guards/roles.guard';
 import { CreateUtilisateurDto } from './dto/create-utilisateur.dto';
 import { UpdateUtilisateurDto } from './dto/update-utilisateur.dto';
 import { UtilisateursService } from './utilisateurs.service';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Utilisateurs')
+@ApiBearerAuth()
 @Controller('admin/utilisateurs')
 @UseGuards(RolesGuard, PermissionsGuard)
 @Roles('super_admin', 'admin')

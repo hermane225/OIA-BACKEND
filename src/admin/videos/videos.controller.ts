@@ -16,7 +16,10 @@ import { PermissionsGuard } from '../../auth/guards/permissions.guard';
 import { RolesGuard } from '../../auth/guards/roles.guard';
 import { VideosService } from './videos.service';
 import { CreateVideoDto, UpdateVideoDto } from './dto/video.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Videos')
+@ApiBearerAuth()
 @Controller('admin/videos')
 @UseGuards(RolesGuard, PermissionsGuard)
 @Roles('super_admin', 'admin', 'editor', 'manager')
