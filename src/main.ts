@@ -8,7 +8,18 @@ import { PrismaService } from './prisma/prisma.service';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.use(helmet({ contentSecurityPolicy: false }));
-  app.enableCors();
+
+  const allowedOrigins = (
+    process.env.CORS_ORIGINS ??
+    'https://backend-oiacafecacao.com,https://www.backend-oiacafecacao.com'
+  )
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+  app.enableCors({
+    origin: allowedOrigins,
+    credentials: true,
+  });
   app.set('trust proxy', 1);
   app.get(PrismaService).enableShutdownHooks(app);
 
@@ -19,6 +30,7 @@ async function bootstrap() {
     )
     .setVersion('1.0')
     .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'token' })
+    .addServer('https://backend-oiacafecacao.com')
     .build();
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api-docs', app, swaggerDocument);
