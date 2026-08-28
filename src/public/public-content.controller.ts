@@ -121,6 +121,11 @@ export class PublicContentController {
     return this.revuePresseService.findAllPublished();
   }
 
+  @Get('revue-presse/:id')
+  findOneRevuePresse(@Param('id', ParseIntPipe) id: number) {
+    return this.revuePresseService.findOne(id);
+  }
+
   @Get('campagnes')
   findCampagnes() {
     return this.campagnesService.findAll();
