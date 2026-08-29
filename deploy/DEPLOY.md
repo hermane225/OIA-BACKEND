@@ -30,8 +30,11 @@ Renseigner `DATABASE_URL`, `DIRECT_URL` (Neon), les identifiants admin par défa
 
 ```
 CORS_ORIGINS=https://backend-oiacafecacao.com,https://www.backend-oiacafecacao.com
+APP_URL=https://backend-oiacafecacao.com
 PORT=3000
 ```
+
+`APP_URL` sert à construire les URLs absolues des fichiers déposés localement dans `uploads/` (revue-presses, agendas, acte-oia, presse-books, documents, photos, projets, avatars). Ce dossier est créé automatiquement au démarrage de l'app et n'est pas versionné (voir `.gitignore`) : il persiste entre les déploiements (`git pull` ne le touche pas).
 
 ## 4. Build et migrations
 

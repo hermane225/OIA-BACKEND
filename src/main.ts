@@ -2,12 +2,24 @@ import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
+import { existsSync, mkdirSync } from 'fs';
+import { join } from 'path';
 import { AppModule } from './app.module';
 import { PrismaService } from './prisma/prisma.service';
+import { UPLOAD_FOLDERS } from './uploads/upload-folders';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.use(helmet({ contentSecurityPolicy: false }));
+
+  const uploadsRoot = join(process.cwd(), 'uploads');
+  for (const folder of UPLOAD_FOLDERS) {
+    const dir = join(uploadsRoot, folder);
+    if (!existsSync(dir)) {
+      mkdirSync(dir, { recursive: true });
+    }
+  }
+  app.useStaticAssets(uploadsRoot, { prefix: '/uploads' });
 
   const allowedOrigins = (
     process.env.CORS_ORIGINS ??

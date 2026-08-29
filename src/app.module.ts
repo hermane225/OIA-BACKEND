@@ -27,6 +27,7 @@ import { ContactModule } from './contact/contact.module';
 import { SiteSettingsModule } from './site-settings/site-settings.module';
 import { MediaModule } from './media/media.module';
 import { PublicModule } from './public/public.module';
+import { UploadsModule } from './uploads/uploads.module';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { PublicModule } from './public/public.module';
     MediaModule,
     AuditLogsModule,
     PublicModule,
+    UploadsModule,
   ],
   controllers: [AppController],
   providers: [
