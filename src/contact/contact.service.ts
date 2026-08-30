@@ -1,10 +1,12 @@
 import {
   BadRequestException,
   Injectable,
+  Logger,
   NotFoundException,
 } from '@nestjs/common';
 import { ContactStatut } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { MailService } from '../mail/mail.service';
 import { normalizeEmail } from '../auth/utils/auth-crypto.util';
 import {
   normalizeOptionalString,
@@ -27,26 +29,35 @@ function normalizeStatut(value: unknown): ContactStatut {
 
 @Injectable()
 export class ContactService {
-  constructor(private readonly prisma: PrismaService) {}
+  private readonly logger = new Logger(ContactService.name);
+
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly mailService: MailService,
+  ) {}
 
   async submit(dto: CreateContactMessageDto) {
     const nom = normalizeRequiredString(dto.nom, 'nom');
     const email = normalizeEmail(normalizeRequiredString(dto.email, 'email'));
     const message = normalizeRequiredString(dto.message, 'message');
+    const telephone = normalizeOptionalString(dto.telephone);
+    const sujet = normalizeOptionalString(dto.sujet);
 
     if (!EMAIL_REGEX.test(email)) {
       throw new BadRequestException('email is not a valid email address.');
     }
 
-    return this.prisma.contactMessage.create({
-      data: {
-        nom,
-        email,
-        telephone: normalizeOptionalString(dto.telephone),
-        sujet: normalizeOptionalString(dto.sujet),
-        message,
-      },
+    const created = await this.prisma.contactMessage.create({
+      data: { nom, email, telephone, sujet, message },
     });
+
+    this.mailService
+      .sendContactNotification({ nom, email, telephone, sujet, message })
+      .catch((error) =>
+        this.logger.error('Failed to send contact notification email', error),
+      );
+
+    return created;
   }
 
   async findAll(filters: { statut?: string } = {}) {
