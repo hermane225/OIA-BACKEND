@@ -1,18 +1,27 @@
 import {
+  BadRequestException,
   Controller,
+  Get,
+  Param,
   Post,
+  Res,
   UploadedFile,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
+import type { Response } from 'express';
 import { memoryStorage } from 'multer';
 import { Permissions } from '../common/decorators/permissions.decorator';
 import { Roles } from '../common/decorators/roles.decorator';
 import { PermissionsGuard } from '../auth/guards/permissions.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
-import { MAX_UPLOAD_SIZE_BYTES } from './upload-folders';
+import {
+  MAX_UPLOAD_SIZE_BYTES,
+  UPLOAD_FOLDERS,
+  UploadFolder,
+} from './upload-folders';
 import { UploadsService } from './uploads.service';
 
 const fileInterceptor = () =>
@@ -84,5 +93,22 @@ export class UploadsController {
   @UseInterceptors(fileInterceptor())
   uploadAvatar(@UploadedFile() file: Express.Multer.File) {
     return this.uploadsService.save('avatars', file);
+  }
+
+  @Get(':folder/:filename')
+  getFile(
+    @Param('folder') folder: string,
+    @Param('filename') filename: string,
+    @Res() res: Response,
+  ) {
+    if (!UPLOAD_FOLDERS.includes(folder as UploadFolder)) {
+      throw new BadRequestException(`Unknown upload folder: ${folder}.`);
+    }
+
+    const filePath = this.uploadsService.resolve(
+      folder as UploadFolder,
+      filename,
+    );
+    res.sendFile(filePath);
   }
 }

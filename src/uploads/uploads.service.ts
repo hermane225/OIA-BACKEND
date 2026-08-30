@@ -1,7 +1,11 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { randomUUID } from 'crypto';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { randomBytes, randomUUID } from 'crypto';
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
-import { extname, join } from 'path';
+import { basename, extname, join } from 'path';
 import {
   FOLDER_ACCEPTED_MIME_TYPES,
   MAX_UPLOAD_SIZE_BYTES,
@@ -44,7 +48,7 @@ export class UploadsService {
       mkdirSync(dir, { recursive: true });
     }
 
-    const filename = `${randomUUID()}${extname(file.originalname).toLowerCase()}`;
+    const filename = this.buildFilename(dir, file.originalname);
     writeFileSync(join(dir, filename), file.buffer);
 
     const baseUrl = (
@@ -53,5 +57,35 @@ export class UploadsService {
     const path = `/uploads/${folder}/${filename}`;
 
     return { url: `${baseUrl}${path}`, path, filename };
+  }
+
+  resolve(folder: UploadFolder, filename: string): string {
+    const safeName = basename(filename);
+    const filePath = join(UPLOADS_ROOT, folder, safeName);
+
+    if (!existsSync(filePath)) {
+      throw new NotFoundException(`File ${safeName} not found in ${folder}.`);
+    }
+
+    return filePath;
+  }
+
+  private buildFilename(dir: string, originalname: string): string {
+    const ext = extname(originalname).toLowerCase();
+    const nameWithoutExt = basename(originalname, extname(originalname));
+    const sanitized = nameWithoutExt
+      .toLowerCase()
+      .replace(/[^a-z0-9-_]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .slice(0, 80);
+
+    const base = sanitized || randomUUID();
+    let filename = `${base}${ext}`;
+
+    while (existsSync(join(dir, filename))) {
+      filename = `${base}-${randomBytes(3).toString('hex')}${ext}`;
+    }
+
+    return filename;
   }
 }
