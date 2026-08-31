@@ -31,4 +31,4 @@ export const UPLOAD_FOLDERS = Object.keys(
   FOLDER_ACCEPTED_MIME_TYPES,
 ) as UploadFolder[];
 
-export const MAX_UPLOAD_SIZE_BYTES = 10 * 1024 * 1024;
+export const MAX_UPLOAD_SIZE_BYTES = 50 * 1024 * 1024;
