@@ -14,6 +14,7 @@ import { PressBookService } from '../admin/press-book/press-book.service';
 import { CampagnesService } from '../admin/campagnes/campagnes.service';
 import { PrixTendanceService } from '../admin/prix-tendance/prix-tendance.service';
 import { RevuePresseService } from '../admin/revue-presse/revue-presse.service';
+import { TextesDefilantsService } from '../admin/textes-defilants/textes-defilants.service';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Public')
@@ -34,6 +35,7 @@ export class PublicContentController {
     private readonly campagnesService: CampagnesService,
     private readonly prixTendanceService: PrixTendanceService,
     private readonly revuePresseService: RevuePresseService,
+    private readonly textesDefilantsService: TextesDefilantsService,
   ) {}
 
   @Get('actualites')
@@ -144,5 +146,10 @@ export class PublicContentController {
   @Get('prix-tendance/:id')
   findOnePrixTendance(@Param('id', ParseIntPipe) id: number) {
     return this.prixTendanceService.findOne(id);
+  }
+
+  @Get('textes-defilants')
+  findActiveTextesDefilants() {
+    return this.textesDefilantsService.findAllActive();
   }
 }

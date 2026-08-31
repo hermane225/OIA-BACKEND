@@ -23,6 +23,7 @@ import { PressBookModule } from './admin/press-book/press-book.module';
 import { CampagnesModule } from './admin/campagnes/campagnes.module';
 import { PrixTendanceModule } from './admin/prix-tendance/prix-tendance.module';
 import { RevuePresseModule } from './admin/revue-presse/revue-presse.module';
+import { TextesDefilantsModule } from './admin/textes-defilants/textes-defilants.module';
 import { ContactModule } from './contact/contact.module';
 import { SiteSettingsModule } from './site-settings/site-settings.module';
 import { MediaModule } from './media/media.module';
@@ -52,6 +53,7 @@ import { UploadsModule } from './uploads/uploads.module';
     CampagnesModule,
     PrixTendanceModule,
     RevuePresseModule,
+    TextesDefilantsModule,
     ContactModule,
     SiteSettingsModule,
     MediaModule,

@@ -471,3 +471,13 @@ model AuditLog {
   @@index([createdAt])
   @@map("audit_logs")
 }
+
+model TexteDefilant {
+  id        Int      @id @default(autoincrement())
+  texte     String   @db.Text
+  actif     Boolean  @default(true)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("textes_defilants")
+}

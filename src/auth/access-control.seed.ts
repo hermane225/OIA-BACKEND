@@ -355,6 +355,26 @@ export const CORE_PERMISSIONS: PermissionSeed[] = [
     description: 'Permet de supprimer un article de revue de presse existant.',
   },
   {
+    code: 'textesdefilants:read',
+    label: 'Lire les textes defilants',
+    description: 'Permet de consulter les textes defilants du site.',
+  },
+  {
+    code: 'textesdefilants:create',
+    label: 'Creer un texte defilant',
+    description: 'Permet de creer un nouveau texte defilant.',
+  },
+  {
+    code: 'textesdefilants:update',
+    label: 'Modifier un texte defilant',
+    description: 'Permet de modifier un texte defilant existant.',
+  },
+  {
+    code: 'textesdefilants:delete',
+    label: 'Supprimer un texte defilant',
+    description: 'Permet de supprimer un texte defilant existant.',
+  },
+  {
     code: 'tableorg:read',
     label: 'Lire les types de partenaires',
     description:
@@ -479,6 +499,9 @@ const EDITOR_PERMISSIONS = [
   'revuepresse:read',
   'revuepresse:create',
   'revuepresse:update',
+  'textesdefilants:read',
+  'textesdefilants:create',
+  'textesdefilants:update',
   'partenaires:read',
   'contact:read',
   'media:read',
@@ -501,6 +524,7 @@ const MANAGER_PERMISSIONS = [
   'campagnes:read',
   'prixtendance:read',
   'revuepresse:read',
+  'textesdefilants:read',
   'partenaires:read',
   'contact:read',
   'contact:update',

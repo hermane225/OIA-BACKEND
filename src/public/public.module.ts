@@ -12,6 +12,7 @@ import { PressBookModule } from '../admin/press-book/press-book.module';
 import { CampagnesModule } from '../admin/campagnes/campagnes.module';
 import { PrixTendanceModule } from '../admin/prix-tendance/prix-tendance.module';
 import { RevuePresseModule } from '../admin/revue-presse/revue-presse.module';
+import { TextesDefilantsModule } from '../admin/textes-defilants/textes-defilants.module';
 import { PublicContentController } from './public-content.controller';
 
 @Module({
@@ -29,6 +30,7 @@ import { PublicContentController } from './public-content.controller';
     CampagnesModule,
     PrixTendanceModule,
     RevuePresseModule,
+    TextesDefilantsModule,
   ],
   controllers: [PublicContentController],
 })
