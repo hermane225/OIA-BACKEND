@@ -10,7 +10,12 @@ import { UPLOAD_FOLDERS } from './uploads/upload-folders';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  app.use(helmet({ contentSecurityPolicy: false }));
+  app.use(
+    helmet({
+      contentSecurityPolicy: false,
+      crossOriginResourcePolicy: { policy: 'cross-origin' },
+    }),
+  );
 
   const uploadsRoot = join(process.cwd(), 'uploads');
   for (const folder of UPLOAD_FOLDERS) {
