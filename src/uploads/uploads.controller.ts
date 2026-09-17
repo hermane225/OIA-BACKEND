@@ -95,6 +95,27 @@ export class UploadsController {
     return this.uploadsService.save('avatars', file);
   }
 
+  @Post('organigramme')
+  @Permissions('organigramme:create')
+  @UseInterceptors(fileInterceptor())
+  uploadOrganigramme(@UploadedFile() file: Express.Multer.File) {
+    return this.uploadsService.save('organigramme', file);
+  }
+
+  @Post('cooperatives')
+  @Permissions('cooperatives:create')
+  @UseInterceptors(fileInterceptor())
+  uploadCooperative(@UploadedFile() file: Express.Multer.File) {
+    return this.uploadsService.save('cooperatives', file);
+  }
+
+  @Post('controleurs-qualite')
+  @Permissions('controleursqualite:create')
+  @UseInterceptors(fileInterceptor())
+  uploadControleurQualite(@UploadedFile() file: Express.Multer.File) {
+    return this.uploadsService.save('controleurs-qualite', file);
+  }
+
   @Get(':folder/:filename')
   getFile(
     @Param('folder') folder: string,

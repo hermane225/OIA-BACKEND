@@ -44,6 +44,11 @@ enum MediaType {
   video
 }
 
+enum Filiere {
+  cacao
+  cafe
+}
+
 enum AuditAction {
   create
   update
@@ -480,4 +485,50 @@ model TexteDefilant {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("textes_defilants")
+}
+
+model FiliereStat {
+  id          Int      @id @default(autoincrement())
+  filiere     Filiere
+  ordre       Int      @default(0)
+  valeur      String   @db.VarChar(50)
+  libelle     String   @db.VarChar(255)
+  description String?  @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@index([filiere])
+  @@map("filiere_stats")
+}
+
+model Organigramme {
+  id        Int      @id @default(autoincrement())
+  image     String   @db.VarChar(255)
+  actif     Boolean  @default(true)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("organigramme")
+}
+
+model Cooperative {
+  id        Int      @id @default(autoincrement())
+  nom       String?  @db.VarChar(255)
+  info      String?  @db.Text
+  image     String?  @db.VarChar(255)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("cooperatives")
+}
+
+model ControleurQualite {
+  id        Int      @id @default(autoincrement())
+  nom       String?  @db.VarChar(255)
+  info      String?  @db.Text
+  image     String?  @db.VarChar(255)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("controleurs_qualite")
 }

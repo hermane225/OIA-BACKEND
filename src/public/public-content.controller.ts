@@ -15,6 +15,10 @@ import { CampagnesService } from '../admin/campagnes/campagnes.service';
 import { PrixTendanceService } from '../admin/prix-tendance/prix-tendance.service';
 import { RevuePresseService } from '../admin/revue-presse/revue-presse.service';
 import { TextesDefilantsService } from '../admin/textes-defilants/textes-defilants.service';
+import { FiliereStatsService } from '../admin/filiere-stats/filiere-stats.service';
+import { OrganigrammeService } from '../admin/organigramme/organigramme.service';
+import { CooperativesService } from '../admin/cooperatives/cooperatives.service';
+import { ControleursQualiteService } from '../admin/controleurs-qualite/controleurs-qualite.service';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Public')
@@ -36,6 +40,10 @@ export class PublicContentController {
     private readonly prixTendanceService: PrixTendanceService,
     private readonly revuePresseService: RevuePresseService,
     private readonly textesDefilantsService: TextesDefilantsService,
+    private readonly filiereStatsService: FiliereStatsService,
+    private readonly organigrammeService: OrganigrammeService,
+    private readonly cooperativesService: CooperativesService,
+    private readonly controleursQualiteService: ControleursQualiteService,
   ) {}
 
   @Get('actualites')
@@ -151,5 +159,25 @@ export class PublicContentController {
   @Get('textes-defilants')
   findActiveTextesDefilants() {
     return this.textesDefilantsService.findAllActive();
+  }
+
+  @Get('filiere-stats')
+  findFiliereStats(@Query('filiere') filiere?: string) {
+    return this.filiereStatsService.findAll(filiere);
+  }
+
+  @Get('organigramme')
+  findActiveOrganigramme() {
+    return this.organigrammeService.findActive();
+  }
+
+  @Get('cooperatives')
+  findCooperatives() {
+    return this.cooperativesService.findAll();
+  }
+
+  @Get('controleurs-qualite')
+  findControleursQualite() {
+    return this.controleursQualiteService.findAll();
   }
 }

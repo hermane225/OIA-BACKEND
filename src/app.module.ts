@@ -24,6 +24,10 @@ import { CampagnesModule } from './admin/campagnes/campagnes.module';
 import { PrixTendanceModule } from './admin/prix-tendance/prix-tendance.module';
 import { RevuePresseModule } from './admin/revue-presse/revue-presse.module';
 import { TextesDefilantsModule } from './admin/textes-defilants/textes-defilants.module';
+import { FiliereStatsModule } from './admin/filiere-stats/filiere-stats.module';
+import { OrganigrammeModule } from './admin/organigramme/organigramme.module';
+import { CooperativesModule } from './admin/cooperatives/cooperatives.module';
+import { ControleursQualiteModule } from './admin/controleurs-qualite/controleurs-qualite.module';
 import { ContactModule } from './contact/contact.module';
 import { SiteSettingsModule } from './site-settings/site-settings.module';
 import { MediaModule } from './media/media.module';
@@ -54,6 +58,10 @@ import { UploadsModule } from './uploads/uploads.module';
     PrixTendanceModule,
     RevuePresseModule,
     TextesDefilantsModule,
+    FiliereStatsModule,
+    OrganigrammeModule,
+    CooperativesModule,
+    ControleursQualiteModule,
     ContactModule,
     SiteSettingsModule,
     MediaModule,

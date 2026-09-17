@@ -6,7 +6,10 @@ export type UploadFolder =
   | 'documents'
   | 'photos'
   | 'projets'
-  | 'avatars';
+  | 'avatars'
+  | 'organigramme'
+  | 'cooperatives'
+  | 'controleurs-qualite';
 
 const IMAGE_MIME_TYPES = [
   'image/jpeg',
@@ -25,6 +28,9 @@ export const FOLDER_ACCEPTED_MIME_TYPES: Record<UploadFolder, string[]> = {
   photos: IMAGE_MIME_TYPES,
   projets: [...IMAGE_MIME_TYPES, PDF_MIME_TYPE],
   avatars: IMAGE_MIME_TYPES,
+  organigramme: IMAGE_MIME_TYPES,
+  cooperatives: IMAGE_MIME_TYPES,
+  'controleurs-qualite': IMAGE_MIME_TYPES,
 };
 
 export const UPLOAD_FOLDERS = Object.keys(
