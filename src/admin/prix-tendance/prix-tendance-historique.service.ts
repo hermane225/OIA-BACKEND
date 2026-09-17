@@ -86,13 +86,16 @@ export class PrixTendanceHistoriqueService {
       await this.ensureCampagneExists(campagneId);
     }
 
+    const prixNat = normalizeOptionalDecimal(dto.prixNat, 'prixNat');
+    const prixInter = normalizeOptionalDecimal(dto.prixInter, 'prixInter');
+
     return this.prisma.prixTendanceHistorique.create({
       data: {
         prixTendanceId,
         campagneId,
-        prixNat: normalizeRequiredDecimal(dto.prixNat, 'prixNat'),
-        prixInter: normalizeRequiredDecimal(dto.prixInter, 'prixInter'),
-        pmgBordChamp: normalizeOptionalDecimal(
+        ...(prixNat ? { prixNat } : {}),
+        ...(prixInter ? { prixInter } : {}),
+        pmgBordChamp: normalizeRequiredDecimal(
           dto.pmgBordChamp,
           'pmgBordChamp',
         ),
@@ -130,15 +133,21 @@ export class PrixTendanceHistoriqueService {
     }
 
     if (dto.prixNat !== undefined) {
-      data.prixNat = normalizeRequiredDecimal(dto.prixNat, 'prixNat');
+      const prixNat = normalizeOptionalDecimal(dto.prixNat, 'prixNat');
+      if (prixNat) {
+        data.prixNat = prixNat;
+      }
     }
 
     if (dto.prixInter !== undefined) {
-      data.prixInter = normalizeRequiredDecimal(dto.prixInter, 'prixInter');
+      const prixInter = normalizeOptionalDecimal(dto.prixInter, 'prixInter');
+      if (prixInter) {
+        data.prixInter = prixInter;
+      }
     }
 
     if (dto.pmgBordChamp !== undefined) {
-      data.pmgBordChamp = normalizeOptionalDecimal(
+      data.pmgBordChamp = normalizeRequiredDecimal(
         dto.pmgBordChamp,
         'pmgBordChamp',
       );

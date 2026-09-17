@@ -1,9 +1,9 @@
 export class CreatePrixTendanceHistoriqueDto {
   prixTendanceId!: number | string;
   campagneId?: number | string | null;
-  prixNat!: number | string;
-  prixInter!: number | string;
-  pmgBordChamp?: number | string | null;
+  prixNat?: number | string | null;
+  prixInter?: number | string | null;
+  pmgBordChamp!: number | string;
   differentielRamassage?: number | string | null;
   forfaitTransport?: number | string | null;
   entreeUsine?: number | string | null;
