@@ -19,6 +19,7 @@ import { FiliereStatsService } from '../admin/filiere-stats/filiere-stats.servic
 import { OrganigrammeService } from '../admin/organigramme/organigramme.service';
 import { CooperativesService } from '../admin/cooperatives/cooperatives.service';
 import { ControleursQualiteService } from '../admin/controleurs-qualite/controleurs-qualite.service';
+import { SocietesCommercialesService } from '../admin/societes-commerciales/societes-commerciales.service';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Public')
@@ -44,6 +45,7 @@ export class PublicContentController {
     private readonly organigrammeService: OrganigrammeService,
     private readonly cooperativesService: CooperativesService,
     private readonly controleursQualiteService: ControleursQualiteService,
+    private readonly societesCommercialesService: SocietesCommercialesService,
   ) {}
 
   @Get('actualites')
@@ -179,5 +181,13 @@ export class PublicContentController {
   @Get('controleurs-qualite')
   findControleursQualite() {
     return this.controleursQualiteService.findAll();
+  }
+
+  @Get('societes-commerciales')
+  findSocietesCommerciales(
+    @Query('type') type?: string,
+    @Query('search') search?: string,
+  ) {
+    return this.societesCommercialesService.findAllPublic({ type, search });
   }
 }

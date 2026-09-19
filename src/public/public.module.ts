@@ -17,6 +17,7 @@ import { FiliereStatsModule } from '../admin/filiere-stats/filiere-stats.module'
 import { OrganigrammeModule } from '../admin/organigramme/organigramme.module';
 import { CooperativesModule } from '../admin/cooperatives/cooperatives.module';
 import { ControleursQualiteModule } from '../admin/controleurs-qualite/controleurs-qualite.module';
+import { SocietesCommercialesModule } from '../admin/societes-commerciales/societes-commerciales.module';
 import { PublicContentController } from './public-content.controller';
 
 @Module({
@@ -39,6 +40,7 @@ import { PublicContentController } from './public-content.controller';
     OrganigrammeModule,
     CooperativesModule,
     ControleursQualiteModule,
+    SocietesCommercialesModule,
   ],
   controllers: [PublicContentController],
 })

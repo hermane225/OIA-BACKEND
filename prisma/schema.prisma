@@ -49,6 +49,14 @@ enum Filiere {
   cafe
 }
 
+enum SocieteType {
+  exportateur
+  acheteur
+  magasin_stockage
+  usine_reconditionnement
+  tiers_detenteur
+}
+
 enum AuditAction {
   create
   update
@@ -307,6 +315,7 @@ model Campagne {
   createdAt    DateTime        @default(now()) @map("created_at")
   updatedAt    DateTime        @updatedAt @map("updated_at")
   historiques  PrixTendanceHistorique[]
+  societesCommerciales SocieteCommerciale[]
 
   @@map("campagnes")
 }
@@ -531,4 +540,24 @@ model ControleurQualite {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("controleurs_qualite")
+}
+
+model SocieteCommerciale {
+  id             Int         @id @default(autoincrement())
+  nom            String      @db.VarChar(255)
+  type           SocieteType
+  numeroAgrement String?     @map("numero_agrement") @db.VarChar(100)
+  adresse        String?     @db.Text
+  ville          String?     @db.VarChar(150)
+  telephone      String?     @db.VarChar(50)
+  email          String?     @db.VarChar(255)
+  campagneId     Int?        @map("campagne_id")
+  actif          Boolean     @default(true)
+  createdAt      DateTime    @default(now()) @map("created_at")
+  updatedAt      DateTime    @updatedAt @map("updated_at")
+  campagne       Campagne?   @relation(fields: [campagneId], references: [id], onDelete: SetNull)
+
+  @@index([type])
+  @@index([campagneId])
+  @@map("societes_commerciales")
 }

@@ -456,6 +456,27 @@ export const CORE_PERMISSIONS: PermissionSeed[] = [
     description: 'Permet de supprimer un controleur qualite existant.',
   },
   {
+    code: 'societescommerciales:read',
+    label: 'Lire les societes commerciales',
+    description:
+      'Permet de consulter les exportateurs, acheteurs, magasins de stockage, usines de reconditionnement et tiers detenteurs agrees.',
+  },
+  {
+    code: 'societescommerciales:create',
+    label: 'Creer une societe commerciale',
+    description: 'Permet de creer une nouvelle societe commerciale agreee.',
+  },
+  {
+    code: 'societescommerciales:update',
+    label: 'Modifier une societe commerciale',
+    description: 'Permet de modifier une societe commerciale existante.',
+  },
+  {
+    code: 'societescommerciales:delete',
+    label: 'Supprimer une societe commerciale',
+    description: 'Permet de supprimer une societe commerciale existante.',
+  },
+  {
     code: 'tableorg:read',
     label: 'Lire les types de partenaires',
     description:
@@ -595,6 +616,9 @@ const EDITOR_PERMISSIONS = [
   'controleursqualite:read',
   'controleursqualite:create',
   'controleursqualite:update',
+  'societescommerciales:read',
+  'societescommerciales:create',
+  'societescommerciales:update',
   'partenaires:read',
   'contact:read',
   'media:read',
@@ -622,6 +646,7 @@ const MANAGER_PERMISSIONS = [
   'organigramme:read',
   'cooperatives:read',
   'controleursqualite:read',
+  'societescommerciales:read',
   'partenaires:read',
   'contact:read',
   'contact:update',

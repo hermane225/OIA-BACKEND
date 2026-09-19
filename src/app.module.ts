@@ -28,6 +28,7 @@ import { FiliereStatsModule } from './admin/filiere-stats/filiere-stats.module';
 import { OrganigrammeModule } from './admin/organigramme/organigramme.module';
 import { CooperativesModule } from './admin/cooperatives/cooperatives.module';
 import { ControleursQualiteModule } from './admin/controleurs-qualite/controleurs-qualite.module';
+import { SocietesCommercialesModule } from './admin/societes-commerciales/societes-commerciales.module';
 import { ContactModule } from './contact/contact.module';
 import { SiteSettingsModule } from './site-settings/site-settings.module';
 import { MediaModule } from './media/media.module';
@@ -62,6 +63,7 @@ import { UploadsModule } from './uploads/uploads.module';
     OrganigrammeModule,
     CooperativesModule,
     ControleursQualiteModule,
+    SocietesCommercialesModule,
     ContactModule,
     SiteSettingsModule,
     MediaModule,
