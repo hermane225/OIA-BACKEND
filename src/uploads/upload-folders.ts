@@ -28,7 +28,7 @@ export const FOLDER_ACCEPTED_MIME_TYPES: Record<UploadFolder, string[]> = {
   photos: IMAGE_MIME_TYPES,
   projets: [...IMAGE_MIME_TYPES, PDF_MIME_TYPE],
   avatars: IMAGE_MIME_TYPES,
-  organigramme: IMAGE_MIME_TYPES,
+  organigramme: [...IMAGE_MIME_TYPES, PDF_MIME_TYPE],
   cooperatives: IMAGE_MIME_TYPES,
   'controleurs-qualite': IMAGE_MIME_TYPES,
 };

@@ -459,7 +459,7 @@ export const CORE_PERMISSIONS: PermissionSeed[] = [
     code: 'societescommerciales:read',
     label: 'Lire les societes commerciales',
     description:
-      'Permet de consulter les exportateurs, acheteurs, magasins de stockage, usines de reconditionnement et tiers detenteurs agrees.',
+      'Permet de consulter les exportateurs, acheteurs, magasins de stockage, usines de conditionnement et tiers detenteurs agrees.',
   },
   {
     code: 'societescommerciales:create',
